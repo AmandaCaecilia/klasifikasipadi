@@ -7,3 +7,4 @@ tensorflow==2.15.0
 pillow==9.4.0
 keras==2.15.0
 keras-utils==1.0.13
+Python==3.11.2
