@@ -1,25 +1,25 @@
 import streamlit as st
 import numpy as np
 import tensorflow as tf
-from PIL import Image, ImageOps
+from tensorflow.keras.models import load_model
+from tensorflow.keras.preprocessing import image
 
 @st.cache_resource
 def load_model(model_path):
     model = tf.keras.models.load_model(model_path)
     return model
 
+
 # Fungsi untuk memproses gambar
 def preprocess_image(img_path, target_size):
-    img = Image.open(img_path)
-    img = ImageOps.fit(img, target_size, Image.ANTIALIAS)
-    img = ImageOps.exif_transpose(img)
+    img = image.load_img(img_path, target_size=target_size)
     img = img.convert('RGB')
-    img_array = np.array(img)
+    img_array = image.img_to_array(img)
     img_array = np.expand_dims(img_array, axis=0)
     return img_array
 
 # Konfigurasi halaman Streamlit
-st.set_page_config(page_title="Klasifikasi Penyakit Daun Padi", page_icon=":leaves:", layout="centered")
+st.set_page_config(page_title="Klasifikasi Penyakit Daun padi", page_icon=":leaves:", layout="centered")
 
 # Tema warna hijau
 st.markdown(
@@ -40,8 +40,8 @@ st.markdown(
 )
 
 # Judul aplikasi
-st.title("Klasifikasi Penyakit Daun Padi")
-st.markdown("Unggah gambar daun Padi untuk mendeteksi penyakitnya.")
+st.title("Klasifikasi Penyakit Daun padi")
+st.markdown("Unggah gambar daun padi untuk mendeteksi penyakitnya.")
 
 # Memuat model
 model_path = 'fold_4_model_D-2_epoch_50.h5'  # Ganti dengan path model Anda
@@ -74,4 +74,6 @@ st.markdown(
     </style>
     """,
     unsafe_allow_html=True
+)
+
 )
