@@ -4,4 +4,4 @@ streamlit
 scikit-learn
 pip==24.1.2
 tensorflow==2.15.0
-Pillow==9.4.0
+pillow==9.4.0
